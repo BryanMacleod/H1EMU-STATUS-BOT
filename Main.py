@@ -3,11 +3,10 @@ import requests
 from bs4 import BeautifulSoup
 import asyncio
 
-# Initialize the bot
-intents = discord.Intents.all()
-bot = discord.Client(intents=intents)
 
-# Function to update status
+intents = discord.Intents.all()
+bot = discord.Client(intents=intents
+
 async def update_status():
     while True:
         try:
@@ -27,12 +26,12 @@ async def update_status():
             pass
         await asyncio.sleep(30)
 
-# Event when the bot is ready
+
 @bot.event
 async def on_ready():
     print('Logged in as {0.user}'.format(bot))
     bot.loop.create_task(update_status())
 
-# Run the bot
+
 if __name__ == '__main__':
     bot.run("TOKEN")
