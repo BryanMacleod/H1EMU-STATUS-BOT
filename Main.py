@@ -4,10 +4,7 @@ import requests
 from bs4 import BeautifulSoup
 import asyncio
 
-# Create a bot object with a command prefix
-bot = commands.Bot(command_prefix='!')
-
-# Initialize the bot
+# Create a bot object with a command prefix and all intents enabled
 intents = discord.Intents.all()
 bot = commands.Bot(command_prefix='!', intents=intents)
 
@@ -30,7 +27,6 @@ async def update_status():
         except:
             pass
         await asyncio.sleep(30)
-
 
 # Run the bot
 if __name__ == '__main__':
