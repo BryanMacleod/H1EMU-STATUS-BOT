@@ -1,4 +1,13 @@
 import discord
+from discord.ext import commands
+
+# Create a bot object with a command prefix
+bot = commands.Bot(command_prefix='!')
+
+# Define a command
+@bot.command()
+async def hello(ctx):
+
 
 # Initialize the bot
 intents = discord.Intents.all()
