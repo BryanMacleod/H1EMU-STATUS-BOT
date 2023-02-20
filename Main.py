@@ -1,13 +1,11 @@
 import discord
 from discord.ext import commands
+import requests
+from bs4 import BeautifulSoup
+import asyncio
 
 # Create a bot object with a command prefix
 bot = commands.Bot(command_prefix='!')
-
-# Define a command
-@bot.command()
-async def hello(ctx):
-
 
 # Initialize the bot
 intents = discord.Intents.all()
@@ -36,4 +34,5 @@ async def update_status():
 
 # Run the bot
 if __name__ == '__main__':
+    bot.loop.create_task(update_status())
     bot.run("TOKEN_HERE")
