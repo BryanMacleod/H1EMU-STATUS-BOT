@@ -1,12 +1,11 @@
 import discord
-from discord.ext import commands
 import requests
 from bs4 import BeautifulSoup
 import asyncio
 
-# Create a bot object with a command prefix and all intents enabled
+# Initialize the bot
 intents = discord.Intents.all()
-bot = commands.Bot(command_prefix='!', intents=intents)
+bot = discord.Client(intents=intents)
 
 # Function to update status
 async def update_status():
@@ -19,7 +18,7 @@ async def update_status():
             for row in rows:
                 cols = row.find_all('td')
                 cols = [col.text.strip() for col in cols]
-                if len(cols) >= 2 and cols[1] == 'SERVERNAME':
+                if len(cols) >= 2 and cols[1] == 'EXACT SERVERNAME FROM H1EMU SITE.':
                     status = cols[3]
                     game = discord.Game(name=f"{status} online in SERVERNAME")
                     await bot.change_presence(activity=game)
@@ -28,7 +27,12 @@ async def update_status():
             pass
         await asyncio.sleep(30)
 
+# Event when the bot is ready
+@bot.event
+async def on_ready():
+    print('Logged in as {0.user}'.format(bot))
+    bot.loop.create_task(update_status())
+
 # Run the bot
 if __name__ == '__main__':
-    bot.loop.create_task(update_status())
-    bot.run("TOKEN_HERE")
+    bot.run("TOKEN")
